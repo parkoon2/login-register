@@ -6,6 +6,8 @@ const mongoose = require('mongoose')
 
 const port = process.env.PORT || 5000
 
+const Users = require('./routes/Users')
+
 app.use(bodyParser.json())
 app.use(cors())
 app.use(
@@ -17,11 +19,11 @@ app.use(
 const mongoURI = 'mongodb://localhost:27017/parkoonlogin'
 
 mongoose
-.connect(mongoURI, {useNewUrlParser: true})
-.then(() => console.log('MongoDB is running'))
-.catch(err => console.log(err))
+    .connect(mongoURI, {useNewUrlParser: true})
+    .then(() => console.log('MongoDB is running'))
+    .catch(err => console.log(err))
 
-// app.use('/users', )
+app.use('/users', Users)
 
 app.listen(port, () => {
     console.log(`Server is running on ${port} port`)
